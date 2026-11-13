@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" role="img" aria-label="A hand sanding a shaped pine derby car body with a sanding block">
+  <defs>
+    <linearGradient id="sandBg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#e6cea9"/>
+      <stop offset="1" stop-color="#cfae82"/>
+    </linearGradient>
+    <linearGradient id="sandPine" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ecc58a"/>
+      <stop offset="0.55" stop-color="#d9a660"/>
+      <stop offset="1" stop-color="#b87f3d"/>
+    </linearGradient>
+    <linearGradient id="sandHand" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f0c39b"/>
+      <stop offset="1" stop-color="#d9a176"/>
+    </linearGradient>
+    <linearGradient id="sandpaper" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#b98a4c"/>
+      <stop offset="1" stop-color="#8f6733"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="900" fill="url(#sandBg)"/>
+  <g stroke="#b4916a" stroke-width="2" opacity="0.4" fill="none">
+    <path d="M 0 130 C 240 122 440 138 660 130 C 880 122 1050 136 1200 128"/>
+    <path d="M 0 760 C 220 752 420 768 640 760 C 860 752 1040 766 1200 758"/>
+    <path d="M 0 868 C 220 860 420 876 640 868 C 860 860 1040 874 1200 866"/>
+  </g>
+
+  <ellipse cx="610" cy="708" rx="360" ry="34" fill="#b08a5e" opacity="0.45"/>
+
+  <!-- car body -->
+  <g>
+    <path d="M 268 692 L 268 606 C 278 542 330 510 404 500 L 712 452 C 774 442 816 454 848 486 L 918 578 C 944 610 956 652 958 692 Z"
+      fill="url(#sandPine)" stroke="#8a5a2b" stroke-width="4" stroke-linejoin="round"/>
+    <path d="M 284 600 C 300 548 344 524 406 514 L 710 468 C 762 460 800 470 828 496" fill="none" stroke="#f6dfb6" stroke-width="7" opacity="0.55"/>
+    <g stroke="#a86f36" stroke-width="2.4" fill="none" opacity="0.42">
+      <path d="M 300 566 C 420 540 560 512 700 490"/>
+      <path d="M 300 612 C 430 590 570 566 720 540"/>
+      <path d="M 300 656 C 440 638 590 614 760 586"/>
+      <path d="M 720 520 C 790 540 850 580 890 640"/>
+    </g>
+    <!-- sanding marks -->
+    <g stroke="#c9974f" stroke-width="2" opacity="0.6">
+      <path d="M 420 540 L 470 532"/>
+      <path d="M 452 566 L 512 556"/>
+      <path d="M 500 518 L 552 510"/>
+      <path d="M 610 496 L 664 486"/>
+      <path d="M 690 552 L 748 542"/>
+    </g>
+    <!-- fender line -->
+    <path d="M 268 640 C 360 626 700 566 940 624" fill="none" stroke="#9b5e2d" stroke-width="3" opacity="0.5"/>
+  </g>
+
+  <!-- sanding block and hand -->
+  <g transform="translate(508 388) rotate(-17)">
+    <rect x="0" y="0" width="286" height="96" rx="10" fill="url(#sandpaper)" stroke="#6f4c25" stroke-width="3"/>
+    <rect x="0" y="0" width="286" height="20" rx="10" fill="#f3e7d2" opacity="0.9"/>
+    <g fill="#5d421f" opacity="0.5">
+      <circle cx="40" cy="48" r="2.4"/><circle cx="78" cy="66" r="2"/><circle cx="120" cy="46" r="2.6"/>
+      <circle cx="162" cy="70" r="2.2"/><circle cx="204" cy="50" r="2.4"/><circle cx="246" cy="66" r="2"/>
+      <circle cx="96" cy="44" r="1.8"/><circle cx="186" cy="46" r="1.8"/>
+    </g>
+  </g>
+
+  <g>
+    <path d="M 560 372 C 566 322 606 296 656 300 C 688 282 738 290 752 322 C 782 324 796 352 786 378 L 772 424 C 760 470 716 494 674 486 L 606 474 C 562 466 548 424 560 372 Z"
+      fill="url(#sandHand)" stroke="#c08a5f" stroke-width="3"/>
+    <g stroke="#c08a5f" stroke-width="3" fill="none" opacity="0.75">
+      <path d="M 566 402 C 618 416 690 430 782 420"/>
+      <path d="M 584 446 C 634 460 694 470 768 458"/>
+      <path d="M 620 356 C 668 368 724 376 772 372"/>
+    </g>
+    <path d="M 604 486 C 640 508 690 512 728 496" fill="none" stroke="#c08a5f" stroke-width="3" opacity="0.6"/>
+  </g>
+
+  <!-- motion arrows -->
+  <g stroke="#8a5a2b" stroke-width="5" fill="none" opacity="0.65" stroke-linecap="round">
+    <path d="M 372 398 C 322 366 296 320 306 276"/>
+    <path d="M 306 296 L 298 268 L 328 282"/>
+    <path d="M 862 452 C 908 424 932 384 926 344"/>
+    <path d="M 916 362 L 928 336 L 944 360"/>
+  </g>
+
+  <!-- dust -->
+  <g fill="#f6e3c4">
+    <circle cx="452" cy="470" r="4"/><circle cx="424" cy="506" r="3"/><circle cx="880" cy="520" r="4"/>
+    <circle cx="912" cy="486" r="3"/><circle cx="398" cy="428" r="2.6"/><circle cx="846" cy="574" r="3"/>
+    <circle cx="932" cy="558" r="2.6"/><circle cx="490" cy="440" r="2.2"/>
+  </g>
+  <g fill="#b98a4c" opacity="0.8">
+    <circle cx="360" cy="660" r="3"/><circle cx="330" cy="686" r="2.2"/><circle cx="880" cy="676" r="3"/>
+    <circle cx="920" cy="700" r="2.2"/>
+  </g>
+</svg>

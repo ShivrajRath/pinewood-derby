@@ -1,0 +1,109 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" role="img" aria-label="A coping saw cutting the traced profile out of a clamped pine block on a workbench">
+  <defs>
+    <linearGradient id="cutBench" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#e3c9a2"/>
+      <stop offset="1" stop-color="#cba97d"/>
+    </linearGradient>
+    <linearGradient id="cutPine" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#e6bb7e"/>
+      <stop offset="1" stop-color="#c1843f"/>
+    </linearGradient>
+    <linearGradient id="cutSteel" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#6e777e"/>
+      <stop offset="0.5" stop-color="#aab4bb"/>
+      <stop offset="1" stop-color="#616a70"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="900" fill="url(#cutBench)"/>
+  <g stroke="#b4916a" stroke-width="2" opacity="0.7">
+    <path d="M 0 150 H 1200"/>
+    <path d="M 0 330 H 1200"/>
+    <path d="M 0 510 H 1200"/>
+    <path d="M 0 690 H 1200"/>
+    <path d="M 0 870 H 1200"/>
+  </g>
+  <g stroke="#b4916a" stroke-width="2" opacity="0.35" fill="none">
+    <path d="M 0 96 C 220 88 420 104 640 96 C 860 88 1040 102 1200 94"/>
+    <path d="M 0 590 C 180 582 380 598 600 590 C 840 582 1020 596 1200 588"/>
+    <path d="M 0 800 C 200 792 400 808 620 800 C 840 792 1020 806 1200 798"/>
+  </g>
+
+  <!-- bench shadow -->
+  <ellipse cx="600" cy="790" rx="420" ry="40" fill="#a8835a" opacity="0.45"/>
+
+  <!-- clamps -->
+  <g fill="#545b61" stroke="#3c4348" stroke-width="3">
+    <rect x="286" y="500" width="26" height="300" rx="6"/>
+    <rect x="262" y="500" width="74" height="42" rx="8"/>
+    <rect x="888" y="500" width="26" height="300" rx="6"/>
+    <rect x="864" y="500" width="74" height="42" rx="8"/>
+  </g>
+
+  <!-- pine block -->
+  <g transform="translate(300 520)">
+    <rect x="10" y="12" width="620" height="232" fill="#8a5a2b" opacity="0.3"/>
+    <rect width="620" height="232" fill="url(#cutPine)" stroke="#8a5a2b" stroke-width="3"/>
+    <g stroke="#a86f36" stroke-width="2.5" fill="none" opacity="0.55">
+      <path d="M 0 40 C 130 32 250 48 380 40 C 500 32 560 44 620 38"/>
+      <path d="M 0 104 C 150 96 260 112 400 104 C 520 96 570 108 620 102"/>
+      <path d="M 0 168 C 120 160 270 176 410 168 C 530 160 580 172 620 166"/>
+      <path d="M 0 214 C 160 206 300 220 450 212 C 550 206 590 216 620 210"/>
+    </g>
+
+    <!-- traced profile on the cut face -->
+    <path d="M 508 20 C 548 20 588 48 606 94 C 588 140 548 168 508 168"
+      fill="none" stroke="#3c3028" stroke-width="4" stroke-dasharray="14 9" opacity="0.85"/>
+
+    <!-- kerf -->
+    <path d="M 470 2 V 176" stroke="#3a2a1c" stroke-width="9" stroke-linecap="round" opacity="0.9"/>
+    <path d="M 470 2 V 120" stroke="#f4e3c6" stroke-width="2" opacity="0.5"/>
+
+    <!-- axle slot marks -->
+    <g stroke="#4b3d33" stroke-width="4" opacity="0.7">
+      <path d="M 60 18 V 214"/>
+      <path d="M 400 18 V 214"/>
+    </g>
+  </g>
+
+  <!-- sawdust -->
+  <g fill="#e9b45f">
+    <circle cx="470" cy="500" r="5"/>
+    <circle cx="496" cy="484" r="3.4"/>
+    <circle cx="446" cy="472" r="4"/>
+    <circle cx="528" cy="498" r="3"/>
+    <circle cx="412" cy="502" r="2.6"/>
+    <circle cx="566" cy="512" r="3.8"/>
+    <circle cx="372" cy="512" r="2.4"/>
+  </g>
+  <g fill="#b98a4c">
+    <circle cx="508" cy="466" r="2.2"/>
+    <circle cx="432" cy="452" r="2.6"/>
+    <circle cx="596" cy="500" r="2.2"/>
+  </g>
+
+  <!-- coping saw -->
+  <g transform="translate(600 512)">
+    <g stroke="#4c545a" stroke-width="16" fill="none" stroke-linecap="round">
+      <path d="M 84 6 C 176 18 236 -44 232 -142 C 226 -252 122 -312 -14 -312 C -164 -312 -274 -242 -286 -134 C -294 -44 -244 20 -176 28"/>
+    </g>
+    <g stroke="#aab4bb" stroke-width="3" fill="none" opacity="0.45">
+      <path d="M 80 -2 C 168 8 226 -52 222 -144 C 216 -246 118 -300 -14 -300"/>
+    </g>
+    <!-- blade -->
+    <path d="M -176 28 L 84 6" stroke="url(#cutSteel)" stroke-width="6" stroke-linecap="round"/>
+    <path d="M -170 34 L 82 14" stroke="#5c666d" stroke-width="7" stroke-dasharray="4 7"/>
+    <!-- handle -->
+    <g transform="translate(88 -8) rotate(3)">
+      <rect x="0" y="-33" width="136" height="66" rx="30" fill="#96602f" stroke="#6c411c" stroke-width="3"/>
+      <g stroke="#6c411c" stroke-width="3" opacity="0.6">
+        <path d="M 34 -24 V 24"/>
+        <path d="M 56 -26 V 26"/>
+        <path d="M 78 -26 V 26"/>
+      </g>
+    </g>
+    <!-- frame bolts -->
+    <circle cx="84" cy="6" r="7" fill="#8d979f" stroke="#5b646a" stroke-width="2"/>
+    <circle cx="-176" cy="28" r="7" fill="#8d979f" stroke="#5b646a" stroke-width="2"/>
+  </g>
+</svg>

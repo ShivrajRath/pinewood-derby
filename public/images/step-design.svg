@@ -1,0 +1,117 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" role="img" aria-label="A pencil-traced derby car profile on the official pine block, with a hand sketch and a ruler">
+  <defs>
+    <pattern id="dsGrid" width="30" height="30" patternUnits="userSpaceOnUse">
+      <path d="M 30 0 H 0 V 30" fill="none" stroke="#7f9694" stroke-width="1" opacity="0.3"/>
+    </pattern>
+    <pattern id="dsGridBold" width="150" height="150" patternUnits="userSpaceOnUse">
+      <path d="M 150 0 H 0 V 150" fill="none" stroke="#7f9694" stroke-width="1.4" opacity="0.4"/>
+    </pattern>
+    <linearGradient id="dsPine" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#e6bb7e"/>
+      <stop offset="1" stop-color="#c78e4d"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="900" fill="#efe4d2"/>
+  <rect width="1200" height="900" fill="url(#dsGrid)"/>
+  <rect width="1200" height="900" fill="url(#dsGridBold)"/>
+
+  <!-- hand sketch -->
+  <g transform="translate(84 92) rotate(-2.5)">
+    <rect width="366" height="212" fill="#f7f1e6" stroke="#cbb9a4" stroke-width="2"/>
+    <text x="26" y="36" font-family="Barlow Condensed, Arial Narrow, sans-serif" font-size="17" letter-spacing="3.4" fill="#9a8877">SIDE PROFILE</text>
+    <path d="M 30 158 C 44 132 62 120 92 116 L 134 82 C 146 70 162 66 184 66 L 250 66 C 272 66 286 76 296 92 L 318 124 C 338 130 348 144 350 158 Z"
+      fill="none" stroke="#6f6257" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+    <circle cx="120" cy="160" r="17" fill="none" stroke="#6f6257" stroke-width="4"/>
+    <circle cx="292" cy="160" r="17" fill="none" stroke="#6f6257" stroke-width="4"/>
+    <path d="M 26 184 H 352" stroke="#a2937f" stroke-width="2" stroke-dasharray="9 9"/>
+    <path d="M 30 195 L 350 195" stroke="#b3a28e" stroke-width="1.5"/>
+    <g stroke="#6f6257" stroke-width="2" fill="none">
+      <path d="M 30 190 V 200"/>
+      <path d="M 350 190 V 200"/>
+    </g>
+  </g>
+
+  <!-- official block -->
+  <g transform="translate(196 366)">
+    <rect x="10" y="14" width="812" height="292" fill="#8a5a2b" opacity="0.18"/>
+    <rect width="812" height="292" fill="url(#dsPine)" stroke="#9b5e2d" stroke-width="3"/>
+    <g stroke="#a86f36" stroke-width="2.5" fill="none" opacity="0.5">
+      <path d="M 0 46 C 160 38 330 54 500 44 C 640 36 740 48 812 40"/>
+      <path d="M 0 118 C 180 110 300 126 470 118 C 620 110 720 124 812 116"/>
+      <path d="M 0 196 C 140 188 300 204 460 196 C 620 188 730 202 812 194"/>
+      <path d="M 0 260 C 200 252 340 266 520 258 C 660 252 750 262 812 256"/>
+    </g>
+
+    <!-- pencil-traced car outline -->
+    <path d="M 86 74 Q 74 74 74 86 L 74 206 Q 74 218 86 218 L 606 218 C 700 218 766 186 780 146 C 766 106 700 74 606 74 Z"
+      fill="none" stroke="#3c3028" stroke-width="4" stroke-dasharray="17 10" stroke-linejoin="round" opacity="0.9"/>
+
+    <!-- axle lines -->
+    <g stroke="#4b3d33" stroke-width="6" opacity="0.85">
+      <path d="M 168 62 V 230"/>
+      <path d="M 640 62 V 230"/>
+    </g>
+    <g stroke="#4b3d33" stroke-width="4" opacity="0.7">
+      <path d="M 154 66 L 182 66"/>
+      <path d="M 626 66 L 654 66"/>
+      <path d="M 154 226 L 182 226"/>
+      <path d="M 626 226 L 654 226"/>
+    </g>
+
+    <!-- centre of mass mark -->
+    <g stroke="#a5160f" stroke-width="3" fill="none" opacity="0.9">
+      <circle cx="596" cy="146" r="20"/>
+      <path d="M 596 116 V 176"/>
+      <path d="M 566 146 H 626"/>
+    </g>
+    <text x="596" y="252" text-anchor="middle" font-family="Barlow Condensed, Arial Narrow, sans-serif" font-size="19" letter-spacing="3" fill="#8a5a2b">COM</text>
+
+    <!-- weight pocket outline -->
+    <rect x="472" y="112" width="120" height="68" fill="none" stroke="#a5160f" stroke-width="3" stroke-dasharray="10 8" opacity="0.75"/>
+    <text x="532" y="198" text-anchor="middle" font-family="Barlow Condensed, Arial Narrow, sans-serif" font-size="16" letter-spacing="2.4" fill="#a5160f" opacity="0.8">TUNGSTEN</text>
+  </g>
+
+  <!-- dimension lines -->
+  <g stroke="#7a6752" stroke-width="2" fill="none">
+    <path d="M 206 322 H 1008"/>
+    <path d="M 206 314 V 330"/>
+    <path d="M 1008 314 V 330"/>
+    <path d="M 196 400 V 690"/>
+    <path d="M 188 400 H 204"/>
+    <path d="M 188 690 H 204"/>
+  </g>
+  <text x="607" y="308" text-anchor="middle" font-family="Barlow Condensed, Arial Narrow, sans-serif" font-size="24" letter-spacing="4" fill="#6f5c48">7 in</text>
+  <g transform="translate(160 545) rotate(-90)">
+    <text x="0" y="0" text-anchor="middle" font-family="Barlow Condensed, Arial Narrow, sans-serif" font-size="22" letter-spacing="3" fill="#6f5c48">1¾ in</text>
+  </g>
+
+  <!-- wheelbase dimension -->
+  <g stroke="#7a6752" stroke-width="2" fill="none" opacity="0.85">
+    <path d="M 370 708 H 836"/>
+    <path d="M 370 700 V 716"/>
+    <path d="M 836 700 V 716"/>
+  </g>
+  <text x="603" y="740" text-anchor="middle" font-family="Barlow Condensed, Arial Narrow, sans-serif" font-size="19" letter-spacing="3" fill="#7a6752">WHEELBASE · 4⅜ in</text>
+
+  <!-- pencil -->
+  <g transform="translate(92 806) rotate(-11)">
+    <rect x="-4" y="-15" width="252" height="30" fill="#e9b45f" stroke="#b8892f" stroke-width="2"/>
+    <path d="M 0 -15 H 248 V 0 H 0 Z" fill="#f2c581" opacity="0.85"/>
+    <rect x="248" y="-15" width="26" height="30" fill="#b9c1c7" stroke="#8d979f" stroke-width="2"/>
+    <rect x="274" y="-14" width="42" height="28" rx="10" fill="#dc8f86" stroke="#b96f67" stroke-width="2"/>
+    <path d="M 0 -15 L -48 -4 L -60 0 L -48 4 L 0 15 Z" fill="#f0d3a8" stroke="#b8892f" stroke-width="2"/>
+    <path d="M -48 -4 L -60 0 L -48 4 Z" fill="#2b2622"/>
+  </g>
+
+  <!-- ruler -->
+  <g transform="translate(766 762) rotate(5)">
+    <rect width="360" height="74" fill="#f2ddb1" stroke="#c2a273" stroke-width="2.5"/>
+    <g stroke="#8a6f4d" stroke-width="2">
+      <path d="M 0 44 H 360"/>
+      <path d="M 40 44 V 74"/><path d="M 80 44 V 62"/><path d="M 120 44 V 74"/>
+      <path d="M 160 44 V 62"/><path d="M 200 44 V 74"/><path d="M 240 44 V 62"/>
+      <path d="M 280 44 V 74"/><path d="M 320 44 V 62"/>
+    </g>
+  </g>
+</svg>

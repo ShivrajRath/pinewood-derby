@@ -1,0 +1,7 @@
+node_modules
+dist
+.tmp-img
+.DS_Store
+*.local
+
+.qa
