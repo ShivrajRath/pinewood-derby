@@ -1,10 +1,11 @@
 import { useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
-import { calculateWeightPlan, formatPosition, OZ_TO_GRAMS } from '../lib/weightPlan'
+import { calculateWeightPlan, OZ_TO_GRAMS } from '../lib/weightPlan'
 import { Icon, Reveal, SectionHeading } from './ui'
 
 const DEFAULTS = {
   unit: 'oz',
+  lengthUnit: 'in',
   currentWeight: '2.60',
   currentCom: 2.4,
   targetWeight: '5.00',
@@ -21,6 +22,17 @@ const toNumber = (value, fallback) => {
 const formatWeight = (ounces, unit = 'oz') =>
   unit === 'g' ? (ounces * OZ_TO_GRAMS).toFixed(1) : ounces.toFixed(2)
 
+const INCH_TO_CM = 2.54
+const formatLength = (inches, unit = 'in') =>
+  unit === 'cm' ? (inches * INCH_TO_CM).toFixed(2) : inches.toFixed(2)
+const formatPosition = (position, unit = 'in') => {
+  if (position === null || position === undefined) return null
+  if (Math.abs(position) < 0.005) return 'at the rear axle line'
+  return `${formatLength(Math.abs(position), unit)} ${unit} ${
+    position > 0 ? 'ahead of' : 'behind'
+  } the rear axle`
+}
+
 function readSetupFromUrl() {
   if (typeof window === 'undefined') return DEFAULTS
 
@@ -34,11 +46,13 @@ function readSetupFromUrl() {
   }
 
   const unit = params.get('unit') === 'g' ? 'g' : 'oz'
+  const lengthUnit = params.get('length') === 'cm' ? 'cm' : 'in'
   const carWeight = read('car', 2.6, 0.5, 6)
   const raceWeight = read('target', 5, 0.5, 6)
 
   return {
     unit,
+    lengthUnit,
     currentWeight: formatWeight(carWeight, unit),
     currentCom: read('com', 2.4, 0.5, 4),
     targetWeight: formatWeight(raceWeight, unit),
@@ -54,6 +68,26 @@ const STATUS_LABELS = {
   'front-limit': 'No room',
   remove: 'Overweight',
   'at-target': 'At weight',
+}
+
+function UnitToggle({ label, options, value, onChange }) {
+  return (
+    <div role="group" aria-label={label} className="flex border border-cream/15">
+      {options.map((option) => (
+        <button
+          key={option}
+          type="button"
+          onClick={() => onChange(option)}
+          aria-pressed={value === option}
+          className={`px-2.5 py-1.5 font-condensed text-[10px] font-semibold uppercase tracking-[0.16em] transition-colors ${
+            value === option ? 'bg-gold text-charcoal' : 'text-cream/35 hover:text-cream'
+          }`}
+        >
+          {option}
+        </button>
+      ))}
+    </div>
+  )
 }
 
 function WeightField({
@@ -104,7 +138,12 @@ function WeightField({
   )
 }
 
-function ComField({ id, label, hint, value, onChange, min, max }) {
+function ComField({ id, label, hint, value, onChange, min, max, unit = 'in' }) {
+  const displayValue = unit === 'cm' ? value * INCH_TO_CM : value
+  const displayMin = unit === 'cm' ? min * INCH_TO_CM : min
+  const displayMax = unit === 'cm' ? max * INCH_TO_CM : max
+  const displayStep = unit === 'cm' ? 0.1 : 0.05
+
   return (
     <div className="py-4">
       <div className="flex items-baseline justify-between gap-4">
@@ -115,27 +154,36 @@ function ComField({ id, label, hint, value, onChange, min, max }) {
           {label}
         </label>
         <span className="font-display text-lg leading-none text-cream">
-          {value.toFixed(2)}
+          {formatLength(value, unit)}
           <span className="ml-1 font-condensed text-[10px] uppercase tracking-[0.16em] text-cream/35">
-            in
+            {unit}
           </span>
         </span>
       </div>
       <input
         id={id}
         type="range"
-        min={min}
-        max={max}
-        step="0.05"
-        value={value}
-        onChange={(event) => onChange(Number(event.target.value))}
+        min={displayMin}
+        max={displayMax}
+        step={displayStep}
+        value={displayValue}
+        onChange={(event) => {
+          const next = Number(event.target.value)
+          onChange(unit === 'cm' ? next / INCH_TO_CM : next)
+        }}
         aria-describedby={`${id}-hint`}
-        aria-valuetext={`${value.toFixed(2)} inches ahead of the rear axle`}
+        aria-valuetext={`${formatLength(value, unit)} ${
+          unit === 'cm' ? 'centimetres' : 'inches'
+        } ahead of the rear axle`}
         className="lab-range mt-4 w-full"
       />
       <div className="mt-1.5 flex justify-between font-condensed text-[9px] uppercase tracking-[0.16em] text-cream/25">
-        <span>{min.toFixed(2)} in</span>
-        <span>{max.toFixed(2)} in</span>
+        <span>
+          {formatLength(min, unit)} {unit}
+        </span>
+        <span>
+          {formatLength(max, unit)} {unit}
+        </span>
       </div>
       <p id={`${id}-hint`} className="mt-2 text-[11px] leading-relaxed text-cream/35">
         {hint}
@@ -144,7 +192,7 @@ function ComField({ id, label, hint, value, onChange, min, max }) {
   )
 }
 
-function PrintDiagram({ currentCom, targetCom, tungstenPosition }) {
+function PrintDiagram({ currentCom, targetCom, tungstenPosition, lengthUnit = 'in' }) {
   const MIN = -0.75
   const MAX = 6.75
   const WIDTH = 460
@@ -164,7 +212,11 @@ function PrintDiagram({ currentCom, targetCom, tungstenPosition }) {
       viewBox="0 0 460 145"
       className="w-full"
       role="img"
-      aria-label={`Top view: current balance ${currentCom.toFixed(2)} inches, target ${targetCom.toFixed(2)} inches.`}
+      aria-label={`Top view: current balance ${formatLength(currentCom, lengthUnit)} ${
+        lengthUnit === 'cm' ? 'centimetres' : 'inches'
+      }, target ${formatLength(targetCom, lengthUnit)} ${
+        lengthUnit === 'cm' ? 'centimetres' : 'inches'
+      }.`}
     >
       <defs>
         <linearGradient id="print-wood" x1="0" y1="0" x2="1" y2="0">
@@ -251,10 +303,10 @@ function PrintDiagram({ currentCom, targetCom, tungstenPosition }) {
           TARGET
         </text>
         <text x={bodyStart} y={138}>
-          7 IN BLOCK
+          {lengthUnit === 'cm' ? '17.78 CM BLOCK' : '7 IN BLOCK'}
         </text>
         <text x={bodyEnd} y={138} textAnchor="end">
-          AXLES 4⅜ IN APART
+          {lengthUnit === 'cm' ? 'AXLES 11.11 CM APART' : 'AXLES 4⅜ IN APART'}
         </text>
       </g>
     </svg>
@@ -272,9 +324,11 @@ function BuildSheet({
   carName,
   notes,
   unit,
+  lengthUnit,
 }) {
   const weightUnit = unit === 'g' ? 'g' : 'oz'
   const formatSheetWeight = (ounces) => formatWeight(ounces, unit)
+  const formatSheetLength = (inches) => formatLength(inches, lengthUnit)
   const capWeight = unit === 'g' ? '141.7 g (5.00 oz)' : '5.00 oz (141.7 g)'
   const date = new Date().toLocaleDateString(undefined, {
     year: 'numeric',
@@ -288,21 +342,21 @@ function BuildSheet({
         'Drill or Dremel the pocket; test-fit the tungsten before glue.',
         'Keep the mass low and centred left-to-right.',
         `Re-weigh to ${formatSheetWeight(plan.targetWeight)} ${weightUnit}; trim or add putty.`,
-        `Re-balance; confirm the COM at ${plan.targetCom.toFixed(2)} in.`,
+        `Re-balance; confirm the COM at ${formatSheetLength(plan.targetCom)} ${lengthUnit}.`,
         'Seal the pocket, then re-check the axles and wheels.',
       ]
     : plan.status === 'remove'
       ? [
           `Remove ${amount} ${weightUnit} from the rear pocket or body.`,
           'Re-weigh; stop at the target weight.',
-          `Check the balance point at ${plan.targetCom.toFixed(2)} in.`,
+          `Check the balance point at ${formatSheetLength(plan.targetCom)} ${lengthUnit}.`,
           'Seal the pocket; check axles, wheels and lube.',
         ]
       : plan.status === 'at-target'
         ? [
             'No tungsten needed; the car is at the target weight.',
             'Check the balance point on a ruler.',
-            `Move existing tungsten forward or back to reach ${plan.targetCom.toFixed(2)} in.`,
+            `Move existing tungsten forward or back to reach ${formatSheetLength(plan.targetCom)} ${lengthUnit}.`,
             'Re-check axles, wheels and lube before check-in.',
           ]
         : [
@@ -369,7 +423,9 @@ function BuildSheet({
           </div>
           <div>
             <span>Current COM</span>
-            <strong>{plan.currentCom.toFixed(2)} in</strong>
+            <strong>
+              {formatSheetLength(plan.currentCom)} {lengthUnit}
+            </strong>
           </div>
           <div>
             <span>Target weight</span>
@@ -379,7 +435,9 @@ function BuildSheet({
           </div>
           <div>
             <span>Target COM</span>
-            <strong>{plan.targetCom.toFixed(2)} in</strong>
+            <strong>
+              {formatSheetLength(plan.targetCom)} {lengthUnit}
+            </strong>
           </div>
         </div>
       </div>
@@ -393,13 +451,14 @@ function BuildSheet({
           currentCom={plan.currentCom}
           targetCom={plan.targetCom}
           tungstenPosition={plan.clampedPosition}
+          lengthUnit={lengthUnit}
         />
         <div className="sheet-legend">
           <span>
-            <i className="dot-now" /> Current {plan.currentCom.toFixed(2)} in
+            <i className="dot-now" /> Current {formatSheetLength(plan.currentCom)} {lengthUnit}
           </span>
           <span>
-            <i className="dot-target" /> Target {plan.targetCom.toFixed(2)} in
+            <i className="dot-target" /> Target {formatSheetLength(plan.targetCom)} {lengthUnit}
           </span>
           {plan.clampedPosition !== null ? (
             <span>
@@ -453,7 +512,9 @@ function BuildSheet({
           </p>
         ) : null}
         <p>
-          Assumes a 7 in block, rear axle 5/8 in from the rear and a rear weight pocket.
+          {lengthUnit === 'cm'
+            ? 'Assumes a 17.78 cm block, rear axle 1.59 cm from the rear and a rear weight pocket.'
+            : 'Assumes a 7 in block, rear axle 5/8 in from the rear and a rear weight pocket.'}{' '}
           Distances are measured forward from the rear axle. Your pack’s scale and rulebook are
           final.
         </p>
@@ -463,7 +524,8 @@ function BuildSheet({
   )
 }
 
-function BalanceDiagram({ currentCom, targetCom, tungstenPosition, feasible }) {
+function BalanceDiagram({ currentCom, targetCom, tungstenPosition, feasible, lengthUnit = 'in' }) {
+  const lengthLabel = lengthUnit === 'cm' ? 'centimetres' : 'inches'
   const MIN = -0.75
   const MAX = 6.75
   const WIDTH = 460
@@ -488,10 +550,11 @@ function BalanceDiagram({ currentCom, targetCom, tungstenPosition, feasible }) {
       aria-labelledby="balance-diagram-title"
     >
       <title id="balance-diagram-title">
-        Top view of a pinewood derby car. The current centre of mass is {currentCom.toFixed(2)}{' '}
-        inches ahead of the rear axle; the target is {targetCom.toFixed(2)} inches.
+        Top view of a pinewood derby car. The current centre of mass is{' '}
+        {formatLength(currentCom, lengthUnit)} {lengthLabel} ahead of the rear axle; the target is{' '}
+        {formatLength(targetCom, lengthUnit)} {lengthLabel}.
         {hasTungsten
-          ? ` Tungsten is placed at ${Math.abs(tungstenPosition).toFixed(2)} inches ${
+          ? ` Tungsten is placed at ${formatLength(Math.abs(tungstenPosition), lengthUnit)} ${lengthLabel} ${
               tungstenPosition >= 0 ? 'ahead of' : 'behind'
             } the rear axle.`
           : ''}
@@ -638,10 +701,10 @@ function BalanceDiagram({ currentCom, targetCom, tungstenPosition, feasible }) {
 
       <g fill="#f7f1e6" fillOpacity="0.25" className="diagram-note">
         <text x={bodyStart} y={136}>
-          7 IN BLOCK
+          {lengthUnit === 'cm' ? '17.78 CM BLOCK' : '7 IN BLOCK'}
         </text>
         <text x={bodyEnd} y={136} textAnchor="end">
-          AXLES 4⅜ IN APART
+          {lengthUnit === 'cm' ? 'AXLES 11.11 CM APART' : 'AXLES 4⅜ IN APART'}
         </text>
       </g>
     </svg>
@@ -651,6 +714,7 @@ function BalanceDiagram({ currentCom, targetCom, tungstenPosition, feasible }) {
 export default function WeightLab() {
   const [initial] = useState(readSetupFromUrl)
   const [unit, setUnit] = useState(initial.unit)
+  const [lengthUnit, setLengthUnit] = useState(initial.lengthUnit)
   const [currentWeight, setCurrentWeight] = useState(initial.currentWeight)
   const [currentCom, setCurrentCom] = useState(initial.currentCom)
   const [targetWeight, setTargetWeight] = useState(initial.targetWeight)
@@ -692,7 +756,8 @@ export default function WeightLab() {
     unit === 'g'
       ? `${Math.abs(plan.weightToAdd).toFixed(2)} oz`
       : `${plan.grams} g`
-  const positionText = plan.position === null ? null : formatPosition(plan.position)
+  const positionText =
+    plan.position === null ? null : formatPosition(plan.position, lengthUnit)
   const statusLabel = STATUS_LABELS[plan.status]
   const isGood = plan.feasible
   const isBad = !plan.feasible && plan.status !== 'at-target'
@@ -711,9 +776,9 @@ export default function WeightLab() {
   } else if (plan.status === 'at-target') {
     recipe = 'No tungsten needed — you are already at target weight.'
   } else if (plan.status === 'rear-limit') {
-    recipe = `The maths wants the weight ${Math.abs(plan.position).toFixed(2)} in behind the rear axle — past the body.`
+    recipe = `The maths wants the weight ${formatLength(Math.abs(plan.position), lengthUnit)} ${lengthUnit} behind the rear axle — past the body.`
   } else {
-    recipe = `The maths wants the weight ${Math.abs(plan.position).toFixed(2)} in ahead of the rear axle — outside the rear pocket.`
+    recipe = `The maths wants the weight ${formatLength(Math.abs(plan.position), lengthUnit)} ${lengthUnit} ahead of the rear axle — outside the rear pocket.`
   }
 
   let advice = ''
@@ -782,6 +847,7 @@ export default function WeightLab() {
       goal: plan.targetCom.toFixed(2),
     })
     if (unit === 'g') params.set('unit', 'g')
+    if (lengthUnit === 'cm') params.set('length', 'cm')
     if (carName.trim()) params.set('name', carName.trim())
     if (notes.trim()) params.set('notes', notes.trim())
     return `${window.location.origin}${window.location.pathname}?${params.toString()}#weight`
@@ -863,28 +929,19 @@ export default function WeightLab() {
                   <p className="font-condensed text-[10px] font-semibold uppercase tracking-[0.3em] text-cream/45">
                     Build inputs
                   </p>
-                  <div className="flex items-center gap-4">
-                    <div
-                      role="group"
-                      aria-label="Weight units"
-                      className="flex border border-cream/15"
-                    >
-                      {['oz', 'g'].map((option) => (
-                        <button
-                          key={option}
-                          type="button"
-                          onClick={() => changeUnit(option)}
-                          aria-pressed={unit === option}
-                          className={`px-2.5 py-1.5 font-condensed text-[10px] font-semibold uppercase tracking-[0.16em] transition-colors ${
-                            unit === option
-                              ? 'bg-gold text-charcoal'
-                              : 'text-cream/35 hover:text-cream'
-                          }`}
-                        >
-                          {option}
-                        </button>
-                      ))}
-                    </div>
+                  <div className="flex flex-wrap items-center gap-3">
+                    <UnitToggle
+                      label="Weight units"
+                      options={['oz', 'g']}
+                      value={unit}
+                      onChange={changeUnit}
+                    />
+                    <UnitToggle
+                      label="Distance units"
+                      options={['in', 'cm']}
+                      value={lengthUnit}
+                      onChange={setLengthUnit}
+                    />
                     <button
                       type="button"
                       onClick={reset}
@@ -911,11 +968,16 @@ export default function WeightLab() {
                   <ComField
                     id="current-com"
                     label="Current centre of mass"
-                    hint="Balance it on a ruler; measure forward from the rear axle. A bare block with wheels usually sits around 2.4–2.8 in."
+                    hint={
+                      lengthUnit === 'cm'
+                        ? 'Balance it on a ruler; measure forward from the rear axle. A bare block with wheels usually sits around 6.1–7.1 cm.'
+                        : 'Balance it on a ruler; measure forward from the rear axle. A bare block with wheels usually sits around 2.4–2.8 in.'
+                    }
                     value={currentCom}
                     onChange={setCurrentCom}
                     min={0.5}
                     max={4}
+                    unit={lengthUnit}
                   />
                   <WeightField
                     id="target-weight"
@@ -936,11 +998,16 @@ export default function WeightLab() {
                   <ComField
                     id="target-com"
                     label="Target centre of mass"
-                    hint="Aim for ¾–1 in ahead of the rear axle."
+                    hint={
+                      lengthUnit === 'cm'
+                        ? 'Aim for 1.9–2.5 cm ahead of the rear axle.'
+                        : 'Aim for ¾–1 in ahead of the rear axle.'
+                    }
                     value={targetCom}
                     onChange={setTargetCom}
                     min={0.5}
                     max={1.5}
+                    unit={lengthUnit}
                   />
                 </div>
 
@@ -1089,15 +1156,16 @@ export default function WeightLab() {
                     targetCom={plan.targetCom}
                     tungstenPosition={plan.clampedPosition}
                     feasible={plan.feasible}
+                    lengthUnit={lengthUnit}
                   />
                   <div className="mt-1 flex flex-wrap gap-x-5 gap-y-2 font-condensed text-[9px] uppercase tracking-[0.18em] text-cream/40">
                     <span className="flex items-center gap-2">
                       <span className="h-2 w-2 rounded-full bg-cream/60" aria-hidden="true" />
-                      Now {plan.currentCom.toFixed(2)} in
+                      Now {formatLength(plan.currentCom, lengthUnit)} {lengthUnit}
                     </span>
                     <span className="flex items-center gap-2">
                       <span className="h-2 w-2 rotate-45 bg-ember" aria-hidden="true" />
-                      Target {plan.targetCom.toFixed(2)} in
+                      Target {formatLength(plan.targetCom, lengthUnit)} {lengthUnit}
                     </span>
                     {plan.clampedPosition !== null ? (
                       <span className="flex items-center gap-2">
@@ -1210,6 +1278,7 @@ export default function WeightLab() {
               amount={amount}
               secondaryAmount={secondaryAmount}
               unit={unit}
+              lengthUnit={lengthUnit}
               positionText={positionText}
               statusLabel={statusLabel}
               recipe={recipe}

@@ -69,7 +69,7 @@
 
     <!-- weight pocket outline -->
     <rect x="472" y="112" width="120" height="68" fill="none" stroke="#a5160f" stroke-width="3" stroke-dasharray="10 8" opacity="0.75"/>
-    <text x="532" y="198" text-anchor="middle" font-family="Barlow Condensed, Arial Narrow, sans-serif" font-size="16" letter-spacing="2.4" fill="#a5160f" opacity="0.8">TUNGSTEN</text>
+    <text x="532" y="104" text-anchor="middle" font-family="Barlow Condensed, Arial Narrow, sans-serif" font-size="15" letter-spacing="2.2" fill="#a5160f" opacity="0.85">TUNGSTEN</text>
   </g>
 
   <!-- dimension lines -->
@@ -105,13 +105,13 @@
   </g>
 
   <!-- ruler -->
-  <g transform="translate(766 762) rotate(5)">
-    <rect width="360" height="74" fill="#f2ddb1" stroke="#c2a273" stroke-width="2.5"/>
+  <g transform="translate(704 774) rotate(4)">
+    <rect width="306" height="66" fill="#f2ddb1" stroke="#c2a273" stroke-width="2.5"/>
     <g stroke="#8a6f4d" stroke-width="2">
-      <path d="M 0 44 H 360"/>
-      <path d="M 40 44 V 74"/><path d="M 80 44 V 62"/><path d="M 120 44 V 74"/>
-      <path d="M 160 44 V 62"/><path d="M 200 44 V 74"/><path d="M 240 44 V 62"/>
-      <path d="M 280 44 V 74"/><path d="M 320 44 V 62"/>
+      <path d="M 0 40 H 306"/>
+      <path d="M 34 40 V 66"/><path d="M 68 40 V 56"/><path d="M 102 40 V 66"/>
+      <path d="M 136 40 V 56"/><path d="M 170 40 V 66"/><path d="M 204 40 V 56"/>
+      <path d="M 238 40 V 66"/><path d="M 272 40 V 56"/>
     </g>
   </g>
 </svg>
