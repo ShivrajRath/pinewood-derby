@@ -72,7 +72,12 @@ const STATUS_LABELS = {
 
 function UnitToggle({ label, options, value, onChange }) {
   return (
-    <div role="group" aria-label={label} className="flex border border-cream/15">
+    <div
+      role="group"
+      aria-label={label}
+      title={label}
+      className="flex border border-cream/15"
+    >
       {options.map((option) => (
         <button
           key={option}
@@ -142,7 +147,7 @@ function ComField({ id, label, hint, value, onChange, min, max, unit = 'in' }) {
   const displayValue = unit === 'cm' ? value * INCH_TO_CM : value
   const displayMin = unit === 'cm' ? min * INCH_TO_CM : min
   const displayMax = unit === 'cm' ? max * INCH_TO_CM : max
-  const displayStep = unit === 'cm' ? 0.1 : 0.05
+  const displayStep = unit === 'cm' ? 0.01 : 0.05
 
   return (
     <div className="py-4">
