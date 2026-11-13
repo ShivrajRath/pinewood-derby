@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { photos, raceChecklist, tuneSheet } from '../data/content'
+import { raceChecklist, tuneSheet } from '../data/content'
 import { Icon, Reveal, SectionHeading } from './ui'
 
 export default function RaceDay() {
@@ -22,13 +22,6 @@ export default function RaceDay() {
       className="relative overflow-hidden bg-[#6f100b] py-20 text-cream sm:py-28"
     >
       <div className="absolute inset-0">
-        <img
-          src={photos.track}
-          alt=""
-          loading="lazy"
-          decoding="async"
-          className="h-full w-full object-cover object-center opacity-[0.14]"
-        />
         <div className="absolute inset-0 bg-linear-to-b from-[#4d0a07] via-[#6f100b]/95 to-[#4d0a07]" />
         <div className="absolute inset-0 bg-linear-to-r from-[#4d0a07] via-transparent to-[#4d0a07]/70" />
         <div

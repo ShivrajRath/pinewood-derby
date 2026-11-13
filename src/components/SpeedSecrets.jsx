@@ -1,4 +1,4 @@
-import { photos, speedSecrets } from '../data/content'
+import { speedSecrets } from '../data/content'
 import CarBlueprint from './CarBlueprint'
 import { Icon, Reveal, SectionHeading } from './ui'
 
@@ -15,13 +15,6 @@ export default function SpeedSecrets() {
       className="relative overflow-hidden bg-charcoal py-20 text-cream sm:py-28"
     >
       <div className="absolute inset-0">
-        <img
-          src={photos.track}
-          alt=""
-          loading="lazy"
-          decoding="async"
-          className="h-full w-full object-cover object-center opacity-[0.12]"
-        />
         <div className="absolute inset-0 bg-linear-to-b from-charcoal via-charcoal/95 to-charcoal" />
         <div className="absolute inset-0 bg-linear-to-r from-charcoal via-transparent to-charcoal/60" />
         <div

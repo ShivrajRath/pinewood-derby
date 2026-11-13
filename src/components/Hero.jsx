@@ -1,4 +1,3 @@
-import { photos } from '../data/content'
 import { Icon } from './ui'
 
 const specs = [
@@ -15,12 +14,6 @@ export default function Hero() {
       className="relative flex min-h-[100svh] items-center overflow-hidden bg-charcoal pb-14 pt-28 text-cream sm:pb-16 sm:pt-32"
     >
       <div className="absolute inset-0">
-        <img
-          src={photos.hero}
-          alt=""
-          fetchPriority="high"
-          className="h-full w-full object-cover object-[62%_55%] opacity-75 sm:opacity-85"
-        />
         <div className="absolute inset-0 bg-linear-to-r from-charcoal via-charcoal/90 to-charcoal/30" />
         <div className="absolute inset-0 bg-linear-to-t from-charcoal via-charcoal/10 to-charcoal/70" />
         <div

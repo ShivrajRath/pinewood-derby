@@ -1,31 +1,23 @@
 import { steps } from '../data/content'
 import { Icon, Reveal, SectionHeading } from './ui'
 
-function StepRow({ step, index }) {
-  const flip = index % 2 === 1
-
+function StepRow({ step }) {
   return (
     <Reveal
       as="article"
-      className="group relative pl-14 lg:grid lg:grid-cols-[1fr_5.5rem_1fr] lg:items-start lg:gap-10 lg:pl-0"
+      className="group relative pl-14 lg:grid lg:grid-cols-[5.5rem_1fr] lg:items-start lg:gap-10 lg:pl-0"
     >
       <span className="absolute left-0 top-0 z-10 grid h-10 w-10 place-items-center rounded-full border border-ink/15 bg-charcoal font-display text-sm text-cream shadow-[0_8px_18px_-12px_rgba(0,0,0,0.6)] lg:hidden">
         {step.n}
       </span>
 
-      <div className="relative hidden lg:col-start-2 lg:row-start-1 lg:flex lg:justify-center">
+      <div className="relative hidden lg:col-start-1 lg:row-start-1 lg:flex lg:justify-center">
         <span className="grid h-16 w-16 place-items-center rounded-full bg-charcoal font-display text-xl text-cream ring-8 ring-cream transition-colors duration-300 group-hover:bg-racing">
           {step.n}
         </span>
       </div>
 
-      <div
-        className={
-          flip
-            ? 'lg:col-start-3 lg:row-start-1 lg:pl-8'
-            : 'lg:col-start-1 lg:row-start-1 lg:pr-8'
-        }
-      >
+      <div className="max-w-3xl lg:col-start-2 lg:row-start-1">
         <div className="flex flex-wrap items-center gap-3">
           <span className="font-condensed text-[11px] font-bold uppercase tracking-[0.3em] text-racing">
             Step {step.n}
@@ -89,61 +81,6 @@ function StepRow({ step, index }) {
           <p className="mt-1 text-[13px] italic leading-relaxed text-ink/60">{step.proTip}</p>
         </div>
       </div>
-
-      <figure
-        className={`relative mt-8 lg:row-start-1 lg:mt-0 ${
-          flip ? 'lg:col-start-1' : 'lg:col-start-3'
-        }`}
-      >
-        <div
-          className={`absolute -inset-2 bg-racing/10 ${
-            flip ? 'rotate-[1.1deg]' : '-rotate-[1.1deg]'
-          }`}
-          aria-hidden="true"
-        />
-        <div className="relative overflow-hidden border-[6px] border-cream bg-sand shadow-[0_24px_60px_-38px_rgba(34,27,22,0.7)]">
-          <img
-            src={step.image}
-            alt={step.alt}
-            loading={index === 0 ? 'eager' : 'lazy'}
-            decoding="async"
-            className="aspect-[4/3] w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
-          />
-          <div
-            className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-ink/10"
-            aria-hidden="true"
-          />
-          <span className="absolute left-0 top-0 bg-charcoal/85 px-3 py-1.5 font-condensed text-[10px] font-semibold uppercase tracking-[0.28em] text-cream/80">
-            Fig. {step.n}
-          </span>
-          <span
-            className="absolute right-3 top-3 h-4 w-4 checker-sm opacity-70"
-            aria-hidden="true"
-          />
-        </div>
-        <figcaption className="mt-3 flex items-center justify-between gap-4 font-condensed text-[10px] uppercase tracking-[0.22em] text-ink/40">
-          <span>{step.caption}</span>
-          <span className="shrink-0 text-racing/70">Fig. {step.n}</span>
-        </figcaption>
-        {step.credit ? (
-          <p className="mt-1.5 text-[9px] leading-relaxed tracking-wide text-ink/35">
-            <a
-              href={step.creditUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="underline decoration-ink/20 underline-offset-2 transition-colors hover:text-ink/60"
-            >
-              {step.credit}
-            </a>
-          </p>
-        ) : null}
-        <div
-          className={`absolute -top-3 h-7 w-16 bg-gold/45 backdrop-blur-[1px] ${
-            flip ? '-right-3 rotate-[7deg]' : '-left-3 -rotate-[7deg]'
-          }`}
-          aria-hidden="true"
-        />
-      </figure>
     </Reveal>
   )
 }
@@ -183,13 +120,13 @@ export default function Guide() {
             aria-hidden="true"
           />
           <div
-            className="absolute inset-y-0 left-1/2 hidden w-px -translate-x-1/2 border-l border-dashed border-ink/15 lg:block"
+            className="absolute inset-y-0 left-[2.75rem] hidden w-px border-l border-dashed border-ink/15 lg:block"
             aria-hidden="true"
           />
 
           <div className="space-y-16 sm:space-y-20 lg:space-y-24">
-            {steps.map((step, index) => (
-              <StepRow key={step.n} step={step} index={index} />
+            {steps.map((step) => (
+              <StepRow key={step.n} step={step} />
             ))}
           </div>
         </div>

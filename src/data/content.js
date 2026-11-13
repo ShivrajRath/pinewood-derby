@@ -8,17 +8,6 @@ export const navLinks = [
   { id: 'faq', label: 'FAQ' },
 ]
 
-export const photos = {
-  hero: '/images/hero-track.svg',
-  design: '/images/step-design.svg',
-  cut: '/images/step-cut.svg',
-  sand: '/images/step-sand.svg',
-  paint: '/images/step-paint.svg',
-  wheels: '/images/step-wheels.svg',
-  assembly: '/images/derby-car.jpg',
-  track: '/images/derby-track.svg',
-}
-
 export const tickerItems = [
   'Weight in the rear',
   'Polished axles',
@@ -38,9 +27,6 @@ export const steps = [
     title: 'Design & Template',
     duration: '30 min',
     lede: 'Start with a story, not a saw.',
-    image: photos.design,
-    alt: 'Pencil-traced derby car profile on the official pine block, with a hand sketch of the side view',
-    caption: 'Profile first, sawdust second',
     body: 'Lay the official block — 1¾ × 7 × 1¼ inches — on graph paper and sketch two views: the side profile and the top. Pick a shape you can actually cut: a low wedge, a rail rider, or a classic cab. Trace the outline onto the pine with a fine pencil, then mark the rear and front axle lines ⅝ inch from each end. Leave at least ⅜ inch of pine above and below every axle slot, and decide now where two or three ounces of tungsten will hide.',
     bullets: [
       'Trace the official template, then refine the nose and fenders by hand.',
@@ -55,9 +41,6 @@ export const steps = [
     title: 'Cutting the Block',
     duration: '45 min',
     lede: 'Rough it out wide. Sneak up on the line.',
-    image: photos.cut,
-    alt: 'Coping saw cutting the traced profile out of a clamped pine block',
-    caption: 'Cut proud of the line, every time',
     body: 'Clamp the block so the pencil line hangs just off the edge of the bench. Cut the side profile first with a coping saw, staying an eighth of an inch outside the line — you will sand to it later. Tape the offcut back in place to keep a flat reference face, flip the block, and cut the matching side. For the top profile, make relief cuts every inch before you turn the blade. It keeps the pine from splitting. Never cut the axle slots: those get drilled square later.',
     bullets: [
       'Short, even strokes. Let the teeth clear the sawdust.',
@@ -72,9 +55,6 @@ export const steps = [
     title: 'Sanding & Shaping',
     duration: '1 hr',
     lede: 'The shape you can feel is the shape that wins.',
-    image: photos.sand,
-    alt: 'A hand sanding a shaped pine derby car body with a sanding block',
-    caption: 'Eighty grit to four hundred',
     body: 'Work through 80, 120, 220 then 400 grit. Use a hard sanding block on flat panels and a wrapped dowel inside the wheel wells so you do not round over the edges you meant to keep. Ease the nose, the fenders and the tail — a sharp leading edge catches air and paint. When the shape is right, raise the grain with a damp cloth, let it dry, and sand once more at 400. Seal with a sanding sealer, then knock it back. Repeat until the block feels like a guitar neck.',
     bullets: [
       'Sanding with the grain hides scratches; across it, they show.',
@@ -89,9 +69,6 @@ export const steps = [
     title: 'Painting & Decals',
     duration: '1.5 hr + dry',
     lede: 'Light coats. Long waits. Sharp tape lines.',
-    image: photos.paint,
-    alt: 'A spray can misting light coats onto a masked derby car body on a paint stand',
-    caption: 'Warm the can, mist in passes',
     body: 'Mask the axle slots and wheel wells with painter’s tape, then prime in two light passes. Warm the can in a bucket of warm water for a finer mist, and hold it ten inches from the body. Two or three colour coats, about ten minutes of flash time between each, then let it cure overnight. Wet-sand with 1500 grit, apply decals with tweezers and a drop of water so you can slide them into place, and seal everything under two coats of clear. Weigh the car after paint — it always gains more than you expect.',
     bullets: [
       'Prime first: bare pine drinks paint unevenly.',
@@ -107,9 +84,6 @@ export const steps = [
     title: 'Prepping the Axles & Wheels',
     duration: '45 min',
     lede: 'Where the hidden speed lives.',
-    image: photos.wheels,
-    alt: 'A derby wheel, a polished axle and a close-up of the polished wheel bore',
-    caption: 'The least glamorous step, the biggest gain',
     body: 'This step moves your time more than any paint job. File the crimp marks off each axle, then wet-sand 400 → 800 → 1500 and finish with metal polish until it mirrors. Chuck the axle in a Dremel at low speed and spin it against a cloth for a final polish. On the wheels, scrape the mould seam off the tread and the burrs off both hubs with a sharp blade — lightly. Clean each bore with a pipe cleaner and a little polish. A flick of the finger should spin a wheel for six to eight seconds.',
     bullets: [
       'Cant the rear axles 1.5–2° for rail riding if your rules allow it.',
@@ -124,11 +98,6 @@ export const steps = [
     title: 'Final Assembly',
     duration: '30 min',
     lede: 'Align, weigh, lube — then do it again.',
-    image: photos.assembly,
-    alt: 'A finished white pinewood derby car with racing number 84 and a rear wing',
-    caption: 'Four wheels, one straight line',
-    credit: 'Photo: Doctorindy, CC BY-SA 4.0, via Wikimedia Commons (cropped).',
-    creditUrl: 'https://commons.wikimedia.org/wiki/File:GTPCorvettePinewoodDerby.JPG',
     body: 'Press the axles in so each wheel has about 1/16 inch of play: enough to spin free, not enough to wobble. Roll the car down a smooth, level surface and watch which way it drifts, then adjust one axle at a time. Add tungsten putty to the rear pockets until the scale reads exactly 5.00 ounces — most rules allow a hair over, but you will not need it. Put a small puff of dry graphite in each bore, spin twenty turns, and tap off the excess. Last check: three wheels touching, ⅛ inch of clearance under the body, and a straight four-foot roll.',
     bullets: [
       'Keep a build sheet: weight, COM, axle gap, test times.',

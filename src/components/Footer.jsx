@@ -92,27 +92,6 @@ export default function Footer() {
             local race rules. Amazon links open search results; Pinewood Derby Lab earns nothing
             from them.
           </p>
-          <p className="mt-2 max-w-4xl text-[10px] leading-relaxed text-cream/35">
-            Pinewood derby car photo:{' '}
-            <a
-              href="https://commons.wikimedia.org/wiki/File:GTPCorvettePinewoodDerby.JPG"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="underline decoration-cream/30 underline-offset-2 transition-colors hover:text-cream/60"
-            >
-              Doctorindy
-            </a>
-            ,{' '}
-            <a
-              href="https://creativecommons.org/licenses/by-sa/4.0/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="underline decoration-cream/30 underline-offset-2 transition-colors hover:text-cream/60"
-            >
-              CC BY-SA 4.0
-            </a>
-            , via Wikimedia Commons (cropped).
-          </p>
         </div>
       </div>
     </footer>
